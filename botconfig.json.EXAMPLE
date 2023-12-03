@@ -1,0 +1,9 @@
+{
+    "token": "YOUR DISCORD BOT TOKEN",
+    "starChannels": {
+        "GUILD ID": "DESIGNATED STARBOARD CHANNEL ID",
+        "1231231313123112": "456456546456546546"
+    },
+    "minReactionCount": 3,
+    "sqliteDBPath": "./path/to/yourDatabaseUsing.sqlite"
+}
