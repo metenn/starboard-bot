@@ -30,7 +30,16 @@ export function formatStarMessage(reactCount, message) {
     returnText += `https://discord.com/channels/${message.guildId}/${message.channelId}/${message.id}\n`;
     let urlsText = "";
     for (const attachment of message.attachments.values()) {
-        urlsText += attachment.url + "\n";
+        let txtUrl = attachment.url;
+        // Strip Discord's new URL search params
+        const tmpUrl = new URL(attachment.url);
+        if (tmpUrl.hostname === "cdn.discordapp.com" || tmpUrl.hostname === "media.discordapp.net") {
+            tmpUrl.searchParams.delete("ex");
+            tmpUrl.searchParams.delete("is");
+            tmpUrl.searchParams.delete("hm");
+            txtUrl = tmpUrl.toString();
+        }
+        urlsText += txtUrl + "\n";
     }
     const maxLength = Math.max(Math.min(1999, 1999 - urlsText.length - returnText.length), 0);
     let messageContent = message.content;
